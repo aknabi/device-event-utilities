@@ -26,4 +26,4 @@ can you redo fresh the content of your answer  using the code in the last exampl
 ```
 the output which I used here.
 
-### For the filter script and docs went through the same steps basically... pretty impressed and from first prompt to this repo was less than 1 hour.
+### For the filter script and docs went through the same steps basically... pretty impressed and from first prompt to this repo was about 30 min with half the time setting this repo up.
