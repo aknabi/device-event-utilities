@@ -1,119 +1,145 @@
 # `event_timestamp_diffs.py` Documentation
-## Timestamp Difference Calculator
+# Timestamp Difference Calculator
 
 ## Table of Contents
 
-* Overview
-* Features
-* Requirements
-* Installation
-* Usage
-* Input Format
-* Output Format
-* Example
-* Error Handling
-* Additional Features
-* Extensibility
-* Testing
-* Conclusion
+1. [Overview](#overview)
+2. [Features](#features)
+3. [Requirements](#requirements)
+4. [Installation](#installation)
+5. [Usage](#usage)
+6. [Input Format](#input-format)
+7. [Output Format](#output-format)
+8. [Example](#example)
+9. [Error Handling](#error-handling)
+10. [Additional Features](#additional-features)
+11. [Extensibility](#extensibility)
+12. [Testing](#testing)
+13. [Conclusion](#conclusion)
+
+---
 
 ## Overview
 
-The Timestamp Difference Calculator is a Python script designed to process a JSON file containing an array of events, each with a timestamp. The script performs the following operations:
+The **Timestamp Difference Calculator** is a Python script designed to process a JSON file containing an array of events, each with a timestamp. The script performs the following operations:
 
-Reads the input JSON file containing timestamped events.
-Filters events based on an optional start timestamp, ignoring events that occur before this timestamp.
-Sorts the remaining events in chronological order.
-Calculates the number of minutes between each consecutive event.
-Generates an output JSON file containing:
-A summary of the first and last timestamps.
-A differences array detailing the minutes between events along with the corresponding ending timestamps.
+1. **Reads** the input JSON file containing timestamped events.
+2. **Filters** events based on an optional start timestamp, ignoring events that occur before this timestamp.
+3. **Sorts** the remaining events in chronological order.
+4. **Calculates** the number of minutes between each consecutive event.
+5. **Generates** an output JSON file containing:
+   - A **summary** of the first and last timestamps.
+   - A **differences** array detailing the minutes between events along with the corresponding ending timestamps.
+
 This tool is particularly useful for analyzing event sequences, monitoring systems, or any application where understanding the intervals between events is essential.
+
+---
 
 ## Features
 
-Flexible Input Filtering: Optionally specify a start timestamp to process events from a particular point in time.
-Automatic Sorting: Ensures events are processed in chronological order, even if the input is unsorted.
-Detailed Output: Provides a clear summary and detailed differences between events.
-Customizable Timestamp Keys: Accommodates JSON files with different keys for timestamps.
-Comprehensive Error Handling: Handles various error scenarios gracefully, providing informative messages.
+- **Flexible Input Filtering**: Optionally specify a start timestamp to process events from a particular point in time.
+- **Automatic Sorting**: Ensures events are processed in chronological order, even if the input is unsorted.
+- **Detailed Output**: Provides a clear summary and detailed differences between events.
+- **Customizable Timestamp Keys**: Accommodates JSON files with different keys for timestamps.
+- **Comprehensive Error Handling**: Handles various error scenarios gracefully, providing informative messages.
+
+---
 
 ## Requirements
 
-Python Version: Python 3.7 or higher.
-Standard Libraries Used:
-json
-argparse
-datetime
-typing
-Note: No external libraries are required.
+- **Python Version**: Python 3.7 or higher.
+- **Standard Libraries Used**:
+  - `json`
+  - `argparse`
+  - `datetime`
+  - `typing`
+
+*Note: No external libraries are required.*
+
+---
 
 ## Installation
 
-### Clone the Repository (if applicable):
-```
-TODO Update for github upload
-git clone https://github.com/yourusername/timestamp-difference-calculator.git
-cd timestamp-difference-calculator
-```
-### Download the Script:
-* Save the calculate_minute_diffs.py script to your desired directory.
+1. **Clone the Repository** (if applicable):
 
-Verify Python Installation:\
-Ensure you have Python 3.7 or higher installed:
+   ```bash
+   git clone https://github.com/yourusername/timestamp-difference-calculator.git
+   cd timestamp-difference-calculator
+   ```
 
-```
-python --version
-```
-If you don't have Python installed, download it from Python's official website.
+2. **Download the Script**:
+
+   Save the `calculate_minute_diffs.py` script to your desired directory.
+
+3. **Verify Python Installation**:
+
+   Ensure you have Python 3.7 or higher installed:
+
+   ```bash
+   python --version
+   ```
+
+   *If you don't have Python installed, download it from [Python's official website](https://www.python.org/downloads/).*
+
+---
 
 ## Usage
 
 The script is executed via the command line and accepts several arguments to customize its behavior.
 
-### Basic Command Structure
+### **Basic Command Structure**
 
-```
+```bash
 python calculate_minute_diffs.py <input_file> <output_file> [options]
 ```
 
-### Positional Arguments
-**input_file:**\
-Description: Path to the input JSON file containing the array of timestamped events.\
-Example: input.json
+### **Positional Arguments**
 
-**output_file:**\
-Description: Desired path for the output JSON file that will contain the summary and differences.\
-Example: output.json
+1. **`input_file`**:  
+   - **Description**: Path to the input JSON file containing the array of timestamped events.
+   - **Example**: `input.json`
 
-**Optional Arguments**
+2. **`output_file`**:  
+   - **Description**: Desired path for the output JSON file that will contain the summary and differences.
+   - **Example**: `output.json`
 
-**--timestamp_key:**\
-Description: Specifies the key used for timestamps in the JSON objects.\
-Default: 'timestamp'\
-Example: If your JSON objects use "time" instead of "timestamp", specify it as:
-```
---timestamp_key time
-```
+### **Optional Arguments**
 
-**--start_timestamp:**\
-Description: Specifies the ISO 8601 formatted timestamp to start processing from. Events occurring before this timestamp will be skipped.\
-Default: None (processes all events)\
-Usage:
-Example: Only process events from August 1, 2023, 08:00:00 UTC onwards.\
-```--start_timestamp "2023-01-01T08:00:00Z"```
+1. **`--timestamp_key`**:  
+   - **Description**: Specifies the key used for timestamps in the JSON objects.  
+   - **Default**: `'timestamp'`  
+   - **Usage**:  
+     ```bash
+     --timestamp_key time
+     ```
+   - **Example**: If your JSON objects use `"time"` instead of `"timestamp"`, specify it as shown above.
 
-### Full Command Example
-```
+2. **`--start_timestamp`**:  
+   - **Description**: Specifies the ISO 8601 formatted timestamp to start processing from. Events occurring before this timestamp will be skipped.
+   - **Default**: `None` (processes all events)
+   - **Usage**:  
+     ```bash
+     --start_timestamp "2023-01-01T08:00:00Z"
+     ```
+   - **Example**: Only process events from `August 1, 2023, 08:00:00 UTC` onwards.
+
+### **Full Command Example**
+
+```bash
 python calculate_minute_diffs.py input.json output.json --timestamp_key time --start_timestamp "2023-01-01T08:00:00Z"
 ```
+
+---
+
 ## Input Format
 
-The input JSON file should be an array of objects, each containing at least a timestamp field. The key for the timestamp can be customized using the --timestamp_key argument.
+The input JSON file should be an array of objects, each containing at least a timestamp field. The key for the timestamp can be customized using the `--timestamp_key` argument.
 
-Default Timestamp Key: timestamp\
-Example (input.json):
-```
+### **Default Timestamp Key: `timestamp`**
+
+**Example (`input.json`):**
+
+```json
 [
     {"timestamp": "2023-01-01T07:30:00Z", "event": "Pre-Start"},
     {"timestamp": "2023-01-01T08:00:00Z", "event": "Start"},
@@ -121,10 +147,12 @@ Example (input.json):
     {"timestamp": "2023-01-01T11:00:00Z", "event": "End"}
 ]
 ```
-Custom Timestamp Key: time\
-Example (input.json):
 
-```
+### **Custom Timestamp Key: `time`**
+
+**Example (`input.json`):**
+
+```json
 [
     {"time": "2023-01-01T07:30:00Z", "event": "Pre-Start"},
     {"time": "2023-01-01T08:00:00Z", "event": "Start"},
@@ -132,28 +160,30 @@ Example (input.json):
     {"time": "2023-01-01T11:00:00Z", "event": "End"}
 ]
 ```
-Ensure all timestamp values are in ISO 8601 format.
+
+*Ensure all timestamp values are in ISO 8601 format.*
+
+---
 
 ## Output Format
 
 The output is a JSON object containing two main components:
 
-**summary:**\
-Description: Contains the first and last timestamps from the processed events.
+1. **`summary`**:  
+   - **Description**: Contains the first and last timestamps from the processed events.
+   - **Fields**:
+     - `first_timestamp`: The earliest timestamp after filtering.
+     - `last_timestamp`: The latest timestamp after filtering.
 
-Fields:\
-first_timestamp: The earliest timestamp after filtering.\
-last_timestamp: The latest timestamp after filtering.
+2. **`differences`**:  
+   - **Description**: An array of objects detailing the minutes between consecutive events and the corresponding ending timestamps.
+   - **Fields**:
+     - `minutes`: Number of minutes between the current and previous timestamp.
+     - `ending_timestamp`: The timestamp corresponding to the end of the interval.
 
-**differences:**\
-Description: An array of objects detailing the minutes between consecutive events and the corresponding ending timestamps.
+### **Example (`output.json`):**
 
-Fields:
-minutes: Number of minutes between the current and previous timestamp.\
-ending_timestamp: The timestamp corresponding to the end of the interval.\
-
-**Example (output.json):**
-```
+```json
 {
     "summary": {
         "first_timestamp": "2023-01-01T08:00:00+00:00",
@@ -171,18 +201,21 @@ ending_timestamp: The timestamp corresponding to the end of the interval.\
     ]
 }
 ```
-In this example:
 
-The first event is at 08:00:00 UTC, and the last event is at 11:00:00 UTC.
+*In this example:*
 
-There are two intervals:
-- First Interval: 90 minutes between 08:00:00 UTC and 09:30:00 UTC.
-- Second Interval: 90 minutes between 09:30:00 UTC and 11:00:00 UTC.
+- The first event is at `08:00:00 UTC`, and the last event is at `11:00:00 UTC`.
+- There are two intervals:
+  - **First Interval**: 90 minutes between `08:00:00 UTC` and `09:30:00 UTC`.
+  - **Second Interval**: 90 minutes between `09:30:00 UTC` and `11:00:00 UTC`.
+
+---
 
 ## Example
 
-**Given Input (input.json):**
-```
+### **Given Input (`input.json`):**
+
+```json
 [
     {"timestamp": "2023-01-01T07:30:00Z", "event": "Pre-Start"},
     {"timestamp": "2023-01-01T08:00:00Z", "event": "Start"},
@@ -191,16 +224,21 @@ There are two intervals:
 ]
 ```
 
-**Command Without --start_timestamp:**
-```
+### **Command Without `--start_timestamp`:**
+
+```bash
 python calculate_minute_diffs.py input.json output.json
 ```
-Console Output:
+
+**Console Output:**
+
 ```
 Output successfully written to output.json
 ```
-Generated output.json:
-```
+
+**Generated `output.json`:**
+
+```json
 {
     "summary": {
         "first_timestamp": "2023-01-01T07:30:00+00:00",
@@ -223,17 +261,22 @@ Generated output.json:
 }
 ```
 
-**Command With --start_timestamp:**\
-```
+### **Command With `--start_timestamp`:**
+
+```bash
 python calculate_minute_diffs.py input.json output.json --start_timestamp "2023-01-01T08:00:00Z"
 ```
-Console Output:
+
+**Console Output:**
+
 ```
 Filtered out 1 elements before 2023-01-01T08:00:00+00:00.
 Output successfully written to output.json
 ```
-Generated output.json:
-```
+
+**Generated `output.json`:**
+
+```json
 {
     "summary": {
         "first_timestamp": "2023-01-01T08:00:00+00:00",
@@ -251,215 +294,236 @@ Generated output.json:
     ]
 }
 ```
-In this example, the event at 07:30:00 UTC is skipped due to the specified --start_timestamp.
+
+*In this example, the event at `07:30:00 UTC` is skipped due to the specified `--start_timestamp`.*
+
+---
 
 ## Error Handling
 
 The script includes comprehensive error handling to manage various potential issues. Below are common error scenarios and how the script responds to them.
 
-1. Invalid Input File Path
-Scenario: The specified input file does not exist or the path is incorrect.
+### 1. **Invalid Input File Path**
 
-Error Message:
+**Scenario**: The specified input file does not exist or the path is incorrect.
+
+**Error Message**:
+
 ```
 Error reading input file: [Errno 2] No such file or directory: 'nonexistent.json'
 ```
 
-Solution: Ensure the input file path is correct and the file exists.
+**Solution**: Ensure the input file path is correct and the file exists.
 
-2. Invalid JSON Format
-Scenario: The input file is not a valid JSON or not an array of objects.
+### 2. **Invalid JSON Format**
 
-Error Message:
+**Scenario**: The input file is not a valid JSON or not an array of objects.
+
+**Error Message**:
+
 ```
 Error reading input file: Expecting value: line 1 column 1 (char 0)
 ```
-Solution: Verify that the input file is a properly formatted JSON array.
 
-3. Missing Timestamp Key
-Scenario: An event object lacks the specified timestamp key.
+**Solution**: Verify that the input file is a properly formatted JSON array.
 
-Error Message:
+### 3. **Missing Timestamp Key**
+
+**Scenario**: An event object lacks the specified timestamp key.
+
+**Error Message**:
+
 ```
 Error parsing timestamps: 'timestamp' not found in element at index 2
 ```
-Solution: Ensure all event objects contain the specified timestamp key.
 
-4. Invalid Timestamp Format
-Scenario: A timestamp value is not in ISO 8601 format or is malformed.
+**Solution**: Ensure all event objects contain the specified timestamp key.
 
-Error Message:
+### 4. **Invalid Timestamp Format**
+
+**Scenario**: A timestamp value is not in ISO 8601 format or is malformed.
+
+**Error Message**:
+
 ```
 Error parsing timestamps: Invalid timestamp format in element at index 1: "2023-01-01 08:00:00"
 ```
-Solution: Ensure all timestamp values are in valid ISO 8601 format (e.g., "2023-01-01T08:00:00Z").
 
-5. All Events Filtered Out
-Scenario: The specified --start_timestamp filters out all events.
+**Solution**: Ensure all timestamp values are in valid ISO 8601 format (e.g., `"2023-01-01T08:00:00Z"`).
 
-Error Message:
+### 5. **All Events Filtered Out**
+
+**Scenario**: The specified `--start_timestamp` filters out all events.
+
+**Error Message**:
+
 ```
 Filtered out 4 elements before 2023-01-02T00:00:00+00:00.
 No timestamps remain after filtering. Exiting.
 ```
 
-Solution: Choose a --start_timestamp that includes at least one event.
+**Solution**: Choose a `--start_timestamp` that includes at least one event.
 
-6. Invalid --start_timestamp Format
-Scenario: The provided --start_timestamp is not in ISO 8601 format.
+### 6. **Invalid `--start_timestamp` Format**
 
-Error Message:
+**Scenario**: The provided `--start_timestamp` is not in ISO 8601 format.
+
+**Error Message**:
+
 ```
 Error parsing start_timestamp: Invalid timestamp format: 2023-01-01 08:00:00
 ```
-Solution: Provide the --start_timestamp in valid ISO 8601 format (e.g., "2023-01-01T08:00:00Z").
 
-7. Invalid --timestamp_key
-Scenario: The specified --timestamp_key does not exist in any event objects.
+**Solution**: Provide the `--start_timestamp` in valid ISO 8601 format (e.g., `"2023-01-01T08:00:00Z"`).
 
-Error Message:
+### 7. **Invalid `--timestamp_key`**
+
+**Scenario**: The specified `--timestamp_key` does not exist in any event objects.
+
+**Error Message**:
+
 ```
 Error parsing timestamps: 'time' not found in element at index 0
 ```
-Solution: Verify the correct timestamp key is specified using --timestamp_key.
 
-8. Output File Write Errors
-Scenario: The script lacks permissions to write to the specified output path or the path is invalid.
+**Solution**: Verify the correct timestamp key is specified using `--timestamp_key`.
 
-Error Message:
+### 8. **Output File Write Errors**
+
+**Scenario**: The script lacks permissions to write to the specified output path or the path is invalid.
+
+**Error Message**:
+
 ```
 Error writing output file: [Errno 13] Permission denied: 'output.json'
 ```
-Solution: Ensure you have write permissions to the desired output directory and that the path is correct.
+
+**Solution**: Ensure you have write permissions to the desired output directory and that the path is correct.
+
+---
 
 ## Additional Features
 
 While the current script fulfills the primary requirements, here are some additional features and enhancements you might consider implementing:
 
-**End Timestamp Filtering:**
+1. **End Timestamp Filtering**:
+   - **Description**: Add an optional `--end_timestamp` parameter to define an upper bound for processing. Events occurring after this timestamp will be ignored.
+   - **Implementation**:
+     - Add a new argument in the `parse_arguments()` function.
+     - Filter timestamps to be less than or equal to `end_timestamp`.
 
-Description:\
-Add an optional --end_timestamp parameter to define an upper bound for processing. Events occurring after this timestamp will be ignored.
+2. **Handling Timezones**:
+   - **Description**: Ensure all timestamps are normalized to a single timezone or handle multiple timezones gracefully.
+   - **Implementation**:
+     - Utilize timezone-aware datetime objects.
+     - Convert all timestamps to UTC or the desired timezone before processing.
 
-Implementation:\
-Add a new argument in the parse_arguments() function.\
-Filter timestamps to be less than or equal to end_timestamp.\
+3. **Logging**:
+   - **Description**: Integrate Python's `logging` module for better traceability and log management.
+   - **Implementation**:
+     - Replace `print` statements with appropriate logging levels (e.g., `info`, `warning`, `error`).
+     - Configure log outputs to console and/or log files.
 
-**Handling Timezones:**
+4. **Performance Optimization**:
+   - **Description**: Enhance performance for processing large datasets.
+   - **Implementation**:
+     - Optimize data structures and algorithms.
+     - Implement streaming processing for very large files.
 
-Description:\
-Ensure all timestamps are normalized to a single timezone or handle multiple timezones gracefully.
+5. **Unit Testing**:
+   - **Description**: Develop unit tests to ensure the script functions as expected.
+   - **Implementation**:
+     - Use Python's `unittest` framework or other testing libraries like `pytest`.
 
-Implementation:\
-Utilize timezone-aware datetime objects.
-Convert all timestamps to UTC or the desired timezone before processing.
-
-**Logging:**
-
-Description:\
-Integrate Python's logging module for better traceability and log management.
-
-Implementation:\
-Replace print statements with appropriate logging levels (e.g., info, warning, error).
-Configure log outputs to console and/or log files.
-
-**Performance Optimization:**
-
-Description:\
-Enhance performance for processing large datasets.
-
-Implementation:\
-Optimize data structures and algorithms.\
-Implement streaming processing for very large files.
-
-**Unit Testing:**
-
-Description:\
-Develop unit tests to ensure the script functions as expected.
-
-Implementation:\
-Use Python's unittest framework or other testing libraries like pytest.
+---
 
 ## Extensibility
 
 The script is designed with modular functions, making it easy to extend and customize based on specific needs. Here are some ways you can extend the script:
 
-**Adding Event Metadata:**\
-Include additional event details in the output, such as event names or IDs.
+1. **Adding Event Metadata**:
+   - Include additional event details in the output, such as event names or IDs.
 
-**Output Formats:**\
-Support other output formats like CSV or XML in addition to JSON.
+2. **Output Formats**:
+   - Support other output formats like CSV or XML in addition to JSON.
 
-**Advanced Filtering:**\
-Implement filters based on event types, categories, or other criteria besides timestamps.
+3. **Advanced Filtering**:
+   - Implement filters based on event types, categories, or other criteria besides timestamps.
 
-**Interactive Mode:**\
-Develop an interactive command-line interface (CLI) for easier usage without specifying all parameters upfront.
+4. **Interactive Mode**:
+   - Develop an interactive command-line interface (CLI) for easier usage without specifying all parameters upfront.
 
-**Integration with Databases:**\
-Extend the script to read from and write to databases instead of JSON files.
+5. **Integration with Databases**:
+   - Extend the script to read from and write to databases instead of JSON files.
+
+---
 
 ## Testing
 
 Before deploying the script in a production environment, it's crucial to test it with various input scenarios to ensure reliability and correctness.
 
-#### Test Cases
+### **Test Cases**
 
-**Standard Input:**\
-Description: Timestamps are in order and correctly formatted.\
-Expectation: Correct summary and differences.
+1. **Standard Input**:
+   - **Description**: Timestamps are in order and correctly formatted.
+   - **Expectation**: Correct summary and differences.
 
-**Unsorted Input:**\
-Description: Events are not in chronological order.\
-Expectation: Script sorts events correctly and calculates differences accurately.
+2. **Unsorted Input**:
+   - **Description**: Events are not in chronological order.
+   - **Expectation**: Script sorts events correctly and calculates differences accurately.
 
-**Missing Timestamp Key:**\
-Description: Some event objects lack the timestamp key.\
-Expectation: Script raises a KeyError with an informative message.
+3. **Missing Timestamp Key**:
+   - **Description**: Some event objects lack the timestamp key.
+   - **Expectation**: Script raises a `KeyError` with an informative message.
 
-**Invalid Timestamp Formats:**\
-Description: Timestamps are malformed or not in ISO 8601 format.\
-Expectation: Script raises a ValueError with details.
+4. **Invalid Timestamp Formats**:
+   - **Description**: Timestamps are malformed or not in ISO 8601 format.
+   - **Expectation**: Script raises a `ValueError` with details.
 
-**All Events Filtered Out:**\
-Description: The specified --start_timestamp filters out all events.\
-Expectation: Script notifies the user and exits gracefully.
+5. **All Events Filtered Out**:
+   - **Description**: The specified `--start_timestamp` filters out all events.
+   - **Expectation**: Script notifies the user and exits gracefully.
 
-**Different Timestamp Keys:**\
-Description: JSON objects use a different key for timestamps.\
-Expectation: Script processes events correctly when --timestamp_key is specified.
+6. **Different Timestamp Keys**:
+   - **Description**: JSON objects use a different key for timestamps.
+   - **Expectation**: Script processes events correctly when `--timestamp_key` is specified.
 
-**Large Dataset:**\
-Description: Input JSON contains a large number of events.\
-Expectation: Script processes the data efficiently without performance issues.
+7. **Large Dataset**:
+   - **Description**: Input JSON contains a large number of events.
+   - **Expectation**: Script processes the data efficiently without performance issues.
 
-#### Testing Steps
-**Prepare Test JSON Files:**\
-Create multiple JSON files representing different scenarios outlined above.
+### **Testing Steps**
 
-**Run the Script Against Each Test File:**\
-Execute the script using various combinations of arguments.
+1. **Prepare Test JSON Files**:
+   - Create multiple JSON files representing different scenarios outlined above.
 
-**Verify Outputs:**\
-Ensure the output JSON matches expected results for each test case.
+2. **Run the Script Against Each Test File**:
+   - Execute the script using various combinations of arguments.
 
-**Check Error Messages:**\
-Confirm that error messages are informative and accurate for invalid inputs.
+3. **Verify Outputs**:
+   - Ensure the output JSON matches expected results for each test case.
 
-**Automate Testing:**\
-Consider writing automated tests using frameworks like unittest or pytest for continuous testing.
+4. **Check Error Messages**:
+   - Confirm that error messages are informative and accurate for invalid inputs.
+
+5. **Automate Testing**:
+   - Consider writing automated tests using frameworks like `unittest` or `pytest` for continuous testing.
+
+---
 
 ## Conclusion
 
-The Timestamp Difference Calculator is a versatile and robust tool for analyzing time intervals between events in JSON-formatted data. Its flexibility in handling different timestamp keys, optional filtering, and comprehensive error handling makes it suitable for a wide range of applications.
+The **Timestamp Difference Calculator** is a versatile and robust tool for analyzing time intervals between events in JSON-formatted data. Its flexibility in handling different timestamp keys, optional filtering, and comprehensive error handling makes it suitable for a wide range of applications.
 
 By following the documentation above, you can effectively install, configure, and utilize the script to meet your specific data processing needs. Additionally, its modular design allows for easy extension and customization to accommodate future requirements.
 
-### Script Source Code
+---
+
+## Script Source Code
 
 For your convenience, the complete Python script is provided below.
 
-```
+```python
 import json
 import argparse
 from datetime import datetime
@@ -589,11 +653,16 @@ if __name__ == "__main__":
     main()
 ```
 
-### License
+---
 
-Specify the license under which the script is distributed, if applicable.
+## License
 
-### Contact
+*Specify the license under which the script is distributed, if applicable.*
 
-Provide contact information or support channels for users who may have questions or need assistance.
+---
 
+## Contact
+
+*Provide contact information or support channels for users who may have questions or need assistance.*
+
+---
