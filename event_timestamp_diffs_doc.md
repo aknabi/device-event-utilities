@@ -62,6 +62,7 @@ This tool is particularly useful for analyzing event sequences, monitoring syste
 
 1. **Clone the Repository** (if applicable):
 
+### TODO Update for Github from GPT template
    ```bash
    git clone https://github.com/yourusername/timestamp-difference-calculator.git
    cd timestamp-difference-calculator
